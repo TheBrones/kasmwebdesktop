@@ -4,7 +4,7 @@ FROM kasmweb/desktop-deluxe:1.16.1-rolling-daily
 USER root
 
 # Code from: https://github.com/linuxserver/docker-obsidian/tree/main
-    RUN \
+RUN \
     echo "**** add icon ****" && \
     curl -o \
       /kclient/public/icon.png \
