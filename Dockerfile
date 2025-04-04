@@ -10,8 +10,6 @@ RUN \
     apt-get update && \
     apt-get install -y --no-install-recommends \
       curl \
-      chromium \
-      chromium-l10n \
       git \
       libgtk-3-bin \
       libatk1.0 \
