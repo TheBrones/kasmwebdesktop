@@ -20,7 +20,7 @@ RUN \
       ncdu \
       htop \
       btop \
-      filezilla \
+#      filezilla \
       libgtk-3-bin \
       libatk1.0 \
       libatk-bridge2.0 \
