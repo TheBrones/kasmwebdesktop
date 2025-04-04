@@ -29,11 +29,9 @@ RUN \
     echo "**** install obsidian ****" && \
     OBSIDIAN_VERSION=$(curl -sX GET "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest"| awk '/tag_name/{print $4;exit}' FS='[""]'); \
     curl -o \
-      /tmp/obsidian.app -L \
-      "https://github.com/obsidianmd/obsidian-releases/releases/download/${OBSIDIAN_VERSION}/Obsidian-$(echo ${OBSIDIAN_VERSION} | sed 's/v//g').AppImage" && \
-    chmod +x /tmp/obsidian.app && \
-    ./obsidian.app --appimage-extract && \
-    mv squashfs-root /opt/obsidian
+      /tmp/obsidian.deb -L \
+      "https://github.com/obsidianmd/obsidian-releases/releases/download/${OBSIDIAN_VERSION}/Obsidian-$(echo ${OBSIDIAN_VERSION} | sed 's/v//g')_amd64.deb" && \
+    apt install /tmp/obsidian.deb
 
 RUN \
     echo "**** cleanup ****" && \
