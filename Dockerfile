@@ -10,12 +10,12 @@ RUN \
       /kclient/public/icon.png \
       https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/obsidian-logo.png && \
     echo "**** install packages ****" && \
-    apt-get update && \
+    apt-get update
+
+RUN \
     DEBIAN_FRONTEND=noninteractive \
     echo "**** install obsidian ****" && \
-    if [ -z ${OBSIDIAN_VERSION+x} ]; then \
-      OBSIDIAN_VERSION=$(curl -sX GET "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest"| awk '/tag_name/{print $4;exit}' FS='[""]'); \
-    fi && \
+    OBSIDIAN_VERSION=$(curl -sX GET "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest"| awk '/tag_name/{print $4;exit}' FS='[""]'); \
     apt-get install -y --no-install-recommends \
       chromium \
       chromium-l10n \
@@ -34,7 +34,9 @@ RUN \
     mv squashfs-root /opt/obsidian && \
     cp \
       /opt/obsidian/usr/share/icons/hicolor/512x512/apps/obsidian.png \
-      /usr/share/icons/hicolor/512x512/apps/obsidian.png && \
+      /usr/share/icons/hicolor/512x512/apps/obsidian.png
+
+RUN \
     echo "**** cleanup ****" && \
     apt-get autoclean && \
     rm -rf \
