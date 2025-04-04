@@ -8,8 +8,7 @@ WORKDIR $HOME
 
 ######### Customize Container Here ###########
 
-
-# Code from: https://github.com/linuxserver/docker-obsidian/tree/main
+# Install apt applications
 RUN \
     echo "**** install packages ****" && \
     DEBIAN_FRONTEND=noninteractive \
@@ -17,20 +16,35 @@ RUN \
     apt-get install -y --no-install-recommends \
       curl \
       git \
+      bmon \
+      ncdu \
+      htop \
+      btop \
+      filezilla \
       libgtk-3-bin \
       libatk1.0 \
       libatk-bridge2.0 \
       libnss3 \
       python3-xdg
 
+# Install Obsidian 
+# Code from: https://github.com/linuxserver/docker-obsidian/tree/main
 RUN \
     DEBIAN_FRONTEND=noninteractive \
     cd /tmp && \
-    echo "**** install obsidian ****" && \
     OBSIDIAN_VERSION=$(curl -sX GET "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest"| awk '/tag_name/{print $4;exit}' FS='[""]'); \
     curl -o \
       /tmp/obsidian.deb -L \
       "https://github.com/obsidianmd/obsidian-releases/releases/download/${OBSIDIAN_VERSION}/obsidian_$(echo ${OBSIDIAN_VERSION} | sed 's/v//g')_amd64.deb" && \
+    apt install /tmp/obsidian.deb
+
+# Install Bitwarden
+RUN \
+    DEBIAN_FRONTEND=noninteractive \
+    cd /tmp && \
+    curl -o \
+      /tmp/bitwarden.deb -L \
+      "https://bitwarden.com/download/?app=desktop&platform=linux&variant=deb" && \
     apt install /tmp/obsidian.deb
 
 RUN \
