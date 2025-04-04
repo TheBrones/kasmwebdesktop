@@ -10,16 +10,15 @@ WORKDIR $HOME
 
 # Install apt applications
 RUN \
-    echo "**** install packages ****" && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y \
       curl \
       git \
       bmon \
-      ncdu \
+#      ncdu \
       htop \
-      btop \
+#      btop \
 #      filezilla \
       libgtk-3-bin \
       libatk1.0 \
